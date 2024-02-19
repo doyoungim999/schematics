@@ -29,7 +29,7 @@
   vars:
     repo_url: "git@github.com:doyoungim999/configRepo.git" 
     user_email: "doyoung.im1@ibm.com"
-    user_name: "doyoungim999"
+    user_name: "Doyoung Im"
   tasks:  
   - name: Capture current date
     set_fact:
