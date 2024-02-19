@@ -19,7 +19,7 @@
       copy: 
         content: "{{r_content}}"
         dest: /home/vpcuser/configRepo/sysctl/sysctl-{{ ansible_hostname }}
-      when: not r_content.failed
+      when: not r_content is failed 
       delegate_to: jumphost-0
       remote_user: vpcuser
 
