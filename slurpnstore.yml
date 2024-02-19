@@ -22,7 +22,6 @@
       when: not r_content.failed
       delegate_to: jumphost-0
       remote_user: vpcuser
-      ignore_errors: true
 
 - name: Push to git
   hosts: jumphost-0
@@ -45,6 +44,6 @@
 
   - name: Push changes to github
     shell: "cd /home/vpcuser/configRepo && git push origin main" 
-    ignore_errors: true
+
 
 
