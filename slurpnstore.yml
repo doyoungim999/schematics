@@ -19,7 +19,7 @@
       copy: 
         content: "{{r_content}}"
         dest: /home/vpcuser/configRepo/sysctl/sysctl-{{ ansible_hostname }}
-      when: not r_content is failed 
+      when: not r_content.failed
       delegate_to: jumphost-0
       remote_user: vpcuser
 
@@ -44,6 +44,6 @@
 
   - name: Push changes to github
     shell: "cd /home/vpcuser/configRepo && git push origin main" 
-
+  - name: Close
 
 

@@ -1,2 +1,2 @@
-# Configuration Drift Automation  with IBM SChematics
+# Configuration Drift Automation  with IBM Schematics
 

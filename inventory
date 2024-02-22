@@ -1,8 +1,9 @@
 [jumphost]
-52.118.253.255  ansible_user=vpcuser
+bastion  ansible_user=vpcuser
 
 [cgroup]
-52.118.253.255
+server1
+
 [all:vars]
 ansible_connection=ssh
 ansible_ssh_user=vpcuser
