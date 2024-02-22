@@ -1,0 +1,48 @@
+---
+- name:  fetch  sysctl 
+  hosts: cgroup
+  tasks:
+    - name:  fetch a sysctl file 
+      slurp:
+        src: /etc/sysctl.conf
+      register: k_content 
+      become: true
+
+    - name: Decode r key 
+      set_fact:
+        r_content: "{{k_content.content | b64decode }}"
+
+    - debug: 
+        var: r_content
+
+    - name: copy to the target 
+      copy: 
+        content: "{{r_content}}"
+        dest: /home/vpcuser/configRepo/sysctl/sysctl-{{ ansible_hostname }}
+      delegate_to: jumphost-0
+      remote_user: vpcuser
+
+- name: Push to git
+  hosts: jumphost-0
+  serial: 1
+  vars:
+    repo_url: "git@github.com:doyoungim999/configRepo.git" 
+    user_email: "doyoung.im1@ibm.com"
+    user_name: "Doyoung Im"
+  tasks:  
+    - name: Capture current date
+      set_fact:
+        current_date: "{{ ansible_date_time.date }}"
+      run_once: yes
+
+    - name: Set the git config
+      shell: "git config --global user.name {{ user_name }} && git config --global user.email {{ user_email }}"
+
+    - name: Perform a commit operation to the repo
+      shell: "cd /home/vpcuser/configRepo && git add . && git commit -m 'Ansible-commit: {{ current_date }}'" 
+    - name: Push changes to github
+      shell: "cd /home/vpcuser/configRepo && git push origin main" 
+
+
+ 
+
