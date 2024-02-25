@@ -3,8 +3,9 @@ bastion  ansible_user=vpcuser
 
 [cgroup]
 server1
+server2
 
 [all:vars]
 ansible_connection=ssh
 ansible_ssh_user=vpcuser
-ansible_ssh_private_key_file=/root/doykey-nophrase
+ansible_ssh_private_key_file=/root/yourkey-name
